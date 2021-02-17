@@ -37,10 +37,7 @@ stages:
     - group: Release
     steps:
     - task: SSH@0
-      inputs:
-        sshEndpoint:
-#     - task: AzureWebAppContainer@1
-#       inputs:
-#        appName: $(WebAppName)
-#        azureSubscription: 'Resource Manager - Tailspin - Space Game'
-#        imageName: $(RegistryName)/$(webRepository):$(build.buildId)
+      inputs: 
+        sshEndpoint: 'SSH Service Connection'
+        runOptions: commands
+        commands: docker run -d -p 80:80 registrystaging.stardekk.com:443/web:1947
