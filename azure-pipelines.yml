@@ -23,7 +23,7 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
         containerRegistry: 'Docker Private Registry (registrystaging.stardekk.com)'
         tags: |
-          latest
+          $(tag)
 
 - stage: 'Deploy'
   displayName: 'Deploy the container'
