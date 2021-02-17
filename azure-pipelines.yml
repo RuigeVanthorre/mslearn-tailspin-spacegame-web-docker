@@ -25,17 +25,20 @@ stages:
         tags: |
           $(tag)
 
-# - stage: 'Deploy'
-#   displayName: 'Deploy the container'
-#   dependsOn: Build
-#   jobs:
-#   - job: 'Deploy'
-#     displayName: 'Deploy job'
-#     pool:
-#       vmImage: 'ubuntu-18.04'
-#     variables:
-#     - group: Release
-#     steps:
+- stage: 'Deploy'
+  displayName: 'Deploy the container'
+  dependsOn: Build
+  jobs:
+  - job: 'Deploy'
+    displayName: 'Deploy job'
+    pool:
+      vmImage: 'ubuntu-18.04'
+    variables:
+    - group: Release
+    steps:
+    - task: SSH@0
+      inputs:
+        sshEndpoint:
 #     - task: AzureWebAppContainer@1
 #       inputs:
 #        appName: $(WebAppName)
