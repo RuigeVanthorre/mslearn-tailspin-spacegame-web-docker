@@ -43,7 +43,7 @@ stages:
         sshEndpoint: 'SSH Service Connection'
         runOptions: inline
         inline: |
-         'set +e'
-         '/snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}"))'
-         '/snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:latest'
+         set +e;
+         /snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}"));
+         /snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:latest;
     
