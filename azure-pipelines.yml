@@ -3,7 +3,8 @@ trigger:
 
 variables:
   webRepository: 'web'
-  tag: '$(Build.BuildId)'
+  tag: 'latest'
+  #tag: '$(Build.BuildId)'
 
 stages:
 - stage: 'Build'
@@ -40,4 +41,4 @@ stages:
       inputs: 
         sshEndpoint: 'SSH Service Connection'
         runOptions: commands
-        commands: /snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a | grep "registrystaging.stardekk.com:443/web" | awk '{print $1}')) && /snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:1947
+        commands: /snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a | grep "registrystaging.stardekk.com:443/web" | awk '{print $1}')) && /snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:$(tag)
