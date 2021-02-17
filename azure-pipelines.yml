@@ -32,6 +32,7 @@ stages:
   jobs:
   - job: 'Deploy'
     displayName: 'Deploy job'
+    continueOnError: true
     pool:
       name: Default
     variables:
@@ -41,4 +42,4 @@ stages:
       inputs: 
         sshEndpoint: 'SSH Service Connection'
         runOptions: commands
-        commands: /snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}")) || true && /snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:latest
+        commands: /snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}")); /snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:latest
