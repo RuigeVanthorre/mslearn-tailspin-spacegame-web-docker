@@ -45,6 +45,7 @@ stages:
         inline: |
          /snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a -q))
          /snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:latest
+         /snap/bin/docker image prune -f -a
            
     #set +e;
     #change this!
