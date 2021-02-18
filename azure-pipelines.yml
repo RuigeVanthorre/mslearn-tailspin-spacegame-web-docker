@@ -41,13 +41,8 @@ stages:
     - task: SSH@0
       inputs: 
         sshEndpoint: 'SSH Service Connection'
-        runOptions: inline
-        inline: |
-          echo "test"
-          containerID=$(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}")
-          stopContainerID=$(/snap/bin/docker stop $containerID)
-          /snap/bin/docker rm $stopContainerID
-          /snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:latest
+        runOptions: commands
+        commands: containerID=$(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}");stopContainerID=$(/snap/bin/docker stop $containerID);/snap/bin/docker rm $stopContainerID;/snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:latest
          #/snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}"))
            
     #set +e;
