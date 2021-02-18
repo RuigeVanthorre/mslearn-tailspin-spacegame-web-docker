@@ -44,6 +44,7 @@ stages:
         runOptions: inline
         inline: |
           containerID=$(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}")
+          echo $containerID
           stopContainerID=$(/snap/bin/docker stop $containerID)
           /snap/bin/docker rm $stopContainerID
           /snap/bin/docker run -d -p 80:80 registrystaging.stardekk.com:443/web:latest
