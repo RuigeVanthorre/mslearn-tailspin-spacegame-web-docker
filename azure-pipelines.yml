@@ -26,23 +26,23 @@ stages:
         tags: |
           $(tag)
 
-- stage: 'Deploy'
-  displayName: 'Deploy the container'
-  dependsOn: Build
-  jobs:
-  - job: 'Deploy'
-    displayName: 'Deploy job'
-    continueOnError: true
-    pool:
-      name: Default
-    variables:
-    - group: Release
-    steps:
-    - task: SSH@0
-      inputs: 
-        sshEndpoint: 'SSH Service Connection'
-        runOptions: commands
-        commands: /snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}"))
+# - stage: 'Deploy'
+#   displayName: 'Deploy the container'
+#   dependsOn: Build
+#   jobs:
+#   - job: 'Deploy'
+#     displayName: 'Deploy job'
+#     continueOnError: true
+#     pool:
+#       name: Default
+#     variables:
+#     - group: Release
+#     steps:
+#     - task: SSH@0
+#       inputs: 
+#         sshEndpoint: 'SSH Service Connection'
+#         runOptions: commands
+#         commands: /snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker ps -a -q --filter ancestor=registrystaging.stardekk.com:443/web:latest --format="{{.ID}}"))
            
     #set +e;
     #change this!
