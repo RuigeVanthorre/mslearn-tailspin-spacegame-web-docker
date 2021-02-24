@@ -44,7 +44,7 @@ stages:
         runOptions: inline
         inline: |
          /snap/bin/docker rm $(/snap/bin/docker stop $(/snap/bin/docker container ps -aq --filter="name=docker-poc.stardekk.com"))
-         /snap/bin/docker run -d --name "docker-poc.stardekk.com"-p 8080:80 registrystaging.stardekk.com:443/web:latest
+         /snap/bin/docker run -d --name "docker-poc.stardekk.com" -p 8080:80 registrystaging.stardekk.com:443/web:latest
          /snap/bin/docker image prune -f -a
            
     #set +e;
